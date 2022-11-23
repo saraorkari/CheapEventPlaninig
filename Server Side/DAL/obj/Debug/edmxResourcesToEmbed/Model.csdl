@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbprojectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="dbprojectEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="areas" EntityType="dbprojectModel.area" />
+    <EntitySet Name="categories" EntityType="dbprojectModel.category" />
+    <EntitySet Name="histories" EntityType="dbprojectModel.history" />
+    <EntitySet Name="listDetails" EntityType="dbprojectModel.listDetail" />
+    <AssociationSet Name="FK_listDetails_category" Association="dbprojectModel.FK_listDetails_category">
+      <End Role="category" EntitySet="categories" />
+      <End Role="listDetail" EntitySet="listDetails" />
+    </AssociationSet>
+    <EntitySet Name="askUpdates" EntityType="dbprojectModel.askUpdate" />
+    <EntitySet Name="users" EntityType="dbprojectModel.user" />
+    <AssociationSet Name="FK_askUpdate_askUpdate" Association="dbprojectModel.FK_askUpdate_askUpdate">
+      <End Role="user" EntitySet="users" />
+      <End Role="askUpdate" EntitySet="askUpdates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_history_user" Association="dbprojectModel.FK_history_user">
+      <End Role="user" EntitySet="users" />
+      <End Role="history" EntitySet="histories" />
+    </AssociationSet>
+    <EntitySet Name="lists" EntityType="dbprojectModel.list" />
+    <AssociationSet Name="FK_listDetails_list" Association="dbprojectModel.FK_listDetails_list">
+      <End Role="list" EntitySet="lists" />
+      <End Role="listDetail" EntitySet="listDetails" />
+    </AssociationSet>
+    <EntitySet Name="products" EntityType="dbprojectModel.product" />
+    <AssociationSet Name="FK_askUpdate_product" Association="dbprojectModel.FK_askUpdate_product">
+      <End Role="product" EntitySet="products" />
+      <End Role="askUpdate" EntitySet="askUpdates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_product_category" Association="dbprojectModel.FK_product_category">
+      <End Role="category" EntitySet="categories" />
+      <End Role="product" EntitySet="products" />
+    </AssociationSet>
+    <EntitySet Name="cities" EntityType="dbprojectModel.city" />
+    <EntitySet Name="productInShops" EntityType="dbprojectModel.productInShop" />
+    <AssociationSet Name="FK_productInShop_product" Association="dbprojectModel.FK_productInShop_product">
+      <End Role="product" EntitySet="products" />
+      <End Role="productInShop" EntitySet="productInShops" />
+    </AssociationSet>
+    <EntitySet Name="shops" EntityType="dbprojectModel.shop" />
+    <AssociationSet Name="FK_shop_cities" Association="dbprojectModel.FK_shop_cities">
+      <End Role="city" EntitySet="cities" />
+      <End Role="shop" EntitySet="shops" />
+    </AssociationSet>
+    <AssociationSet Name="FK_productInShop_shop" Association="dbprojectModel.FK_productInShop_shop">
+      <End Role="shop" EntitySet="shops" />
+      <End Role="productInShop" EntitySet="productInShops" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="area">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="listDetails" Relationship="dbprojectModel.FK_listDetails_category" FromRole="category" ToRole="listDetail" />
+    <NavigationProperty Name="products" Relationship="dbprojectModel.FK_product_category" FromRole="category" ToRole="product" />
+  </EntityType>
+  <EntityType Name="history">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="user" Relationship="dbprojectModel.FK_history_user" FromRole="history" ToRole="user" />
+  </EntityType>
+  <EntityType Name="listDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <Property Name="ListId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="category" Relationship="dbprojectModel.FK_listDetails_category" FromRole="listDetail" ToRole="category" />
+    <NavigationProperty Name="list" Relationship="dbprojectModel.FK_listDetails_list" FromRole="listDetail" ToRole="list" />
+  </EntityType>
+  <Association Name="FK_listDetails_category">
+    <End Type="dbprojectModel.category" Role="category" Multiplicity="1" />
+    <End Type="dbprojectModel.listDetail" Role="listDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="listDetail">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="askUpdate">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="true" />
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="user" Relationship="dbprojectModel.FK_askUpdate_askUpdate" FromRole="askUpdate" ToRole="user" />
+    <NavigationProperty Name="product" Relationship="dbprojectModel.FK_askUpdate_product" FromRole="askUpdate" ToRole="product" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Phon" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="AddressId" Type="Int32" Nullable="false" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="IsUpdate" Type="Boolean" />
+    <NavigationProperty Name="askUpdates" Relationship="dbprojectModel.FK_askUpdate_askUpdate" FromRole="user" ToRole="askUpdate" />
+    <NavigationProperty Name="histories" Relationship="dbprojectModel.FK_history_user" FromRole="user" ToRole="history" />
+  </EntityType>
+  <Association Name="FK_askUpdate_askUpdate">
+    <End Type="dbprojectModel.user" Role="user" Multiplicity="1" />
+    <End Type="dbprojectModel.askUpdate" Role="askUpdate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="askUpdate">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_history_user">
+    <End Type="dbprojectModel.user" Role="user" Multiplicity="1" />
+    <End Type="dbprojectModel.history" Role="history" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="history">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="list">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Picture" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="listDetails" Relationship="dbprojectModel.FK_listDetails_list" FromRole="list" ToRole="listDetail" />
+  </EntityType>
+  <Association Name="FK_listDetails_list">
+    <End Type="dbprojectModel.list" Role="list" Multiplicity="1" />
+    <End Type="dbprojectModel.listDetail" Role="listDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="list">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="listDetail">
+        <PropertyRef Name="ListId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <Property Name="Picture" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="askUpdates" Relationship="dbprojectModel.FK_askUpdate_product" FromRole="product" ToRole="askUpdate" />
+    <NavigationProperty Name="category" Relationship="dbprojectModel.FK_product_category" FromRole="product" ToRole="category" />
+    <NavigationProperty Name="productInShops" Relationship="dbprojectModel.FK_productInShop_product" FromRole="product" ToRole="productInShop" />
+  </EntityType>
+  <Association Name="FK_askUpdate_product">
+    <End Type="dbprojectModel.product" Role="product" Multiplicity="1" />
+    <End Type="dbprojectModel.askUpdate" Role="askUpdate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="askUpdate">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_product_category">
+    <End Type="dbprojectModel.category" Role="category" Multiplicity="1" />
+    <End Type="dbprojectModel.product" Role="product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="product">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="city">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="shops" Relationship="dbprojectModel.FK_shop_cities" FromRole="city" ToRole="shop" />
+  </EntityType>
+  <EntityType Name="productInShop">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Productld" Type="Int32" Nullable="false" />
+    <Property Name="ShopId" Type="Int32" Nullable="false" />
+    <Property Name="Price" Type="Double" Nullable="false" />
+    <Property Name="Describe" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="product" Relationship="dbprojectModel.FK_productInShop_product" FromRole="productInShop" ToRole="product" />
+    <NavigationProperty Name="shop" Relationship="dbprojectModel.FK_productInShop_shop" FromRole="productInShop" ToRole="shop" />
+  </EntityType>
+  <Association Name="FK_productInShop_product">
+    <End Type="dbprojectModel.product" Role="product" Multiplicity="1" />
+    <End Type="dbprojectModel.productInShop" Role="productInShop" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="productInShop">
+        <PropertyRef Name="Productld" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="shop">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CityId" Type="Int32" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="city" Relationship="dbprojectModel.FK_shop_cities" FromRole="shop" ToRole="city" />
+    <NavigationProperty Name="productInShops" Relationship="dbprojectModel.FK_productInShop_shop" FromRole="shop" ToRole="productInShop" />
+  </EntityType>
+  <Association Name="FK_shop_cities">
+    <End Type="dbprojectModel.city" Role="city" Multiplicity="1" />
+    <End Type="dbprojectModel.shop" Role="shop" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="city">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="shop">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_productInShop_shop">
+    <End Type="dbprojectModel.shop" Role="shop" Multiplicity="1" />
+    <End Type="dbprojectModel.productInShop" Role="productInShop" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="shop">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="productInShop">
+        <PropertyRef Name="ShopId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

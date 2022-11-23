@@ -1,0 +1,9 @@
+<body>
+    <h3>המחיר של {productName} בירידה</h3>
+    <p>פרטים:</p>
+    <b>פרטי החנות</b>: {shopDetails}
+    <br />
+    <b>פרטי המוצר</b>: {productDetails}
+    <br />
+    <a href="http://localhost:4200/">CE - P</a>
+</body>

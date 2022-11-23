@@ -1,0 +1,5 @@
+C:\sara or\פרויקט גמר עם שרה אור\github\project\DTO1\bin\Debug\DTO1.dll
+C:\sara or\פרויקט גמר עם שרה אור\github\project\DTO1\bin\Debug\DTO1.pdb
+C:\sara or\פרויקט גמר עם שרה אור\github\project\DTO1\obj\Debug\DTO.csprojAssemblyReference.cache
+C:\sara or\פרויקט גמר עם שרה אור\github\project\DTO1\obj\Debug\DTO1.dll
+C:\sara or\פרויקט גמר עם שרה אור\github\project\DTO1\obj\Debug\DTO1.pdb

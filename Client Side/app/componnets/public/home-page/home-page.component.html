@@ -1,0 +1,20 @@
+<br>
+<h1><img id="logo1" src="/assets/image/לוגו/l1.png"> </h1>
+<br>
+<app-login></app-login>
+<nav>
+  <a mat-button routerLink="/">
+    <span mat-button-wrapper>
+      <img id="logo2" src="/assets/image/לוגו/logowhite.jpg">
+    </span>
+  </a>
+  <a *ngIf="!user&&!shop" mat-button routerLink="/login">כניסה</a>
+  <a *ngIf="!user&&!shop" mat-button routerLink="/signin">הרשמה לאתר</a>
+  <a mat-button routerLink="/organize-event">ארגון אירוע</a>
+  <a mat-button routerLink="/freeSearch">חיפוש חופשי</a>
+  <a mat-button routerLink="/about">אודות</a>
+  <a *ngIf="user" mat-button routerLink="/history">חיפושים אחרונים</a>
+</nav>
+<hr>
+<!-- <app-dialog></app-dialog> -->
+<!-- <button mat-button *ngIf="user" (click)="delete()">הפסקת שליחת המיילים</button> -->

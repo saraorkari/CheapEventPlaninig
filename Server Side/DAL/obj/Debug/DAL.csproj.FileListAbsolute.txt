@@ -1,0 +1,11 @@
+C:\sara or\פרויקט גמר עם שרה אור\github\project\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
+C:\sara or\פרויקט גמר עם שרה אור\github\project\DAL\bin\Debug\DAL.dll.config
+C:\sara or\פרויקט גמר עם שרה אור\github\project\DAL\bin\Debug\DAL.dll
+C:\sara or\פרויקט גמר עם שרה אור\github\project\DAL\bin\Debug\DAL.pdb
+C:\sara or\פרויקט גמר עם שרה אור\github\project\DAL\bin\Debug\EntityFramework.dll
+C:\sara or\פרויקט גמר עם שרה אור\github\project\DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\sara or\פרויקט גמר עם שרה אור\github\project\DAL\bin\Debug\EntityFramework.xml
+C:\sara or\פרויקט גמר עם שרה אור\github\project\DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\sara or\פרויקט גמר עם שרה אור\github\project\DAL\obj\Debug\DAL.csproj.CopyComplete
+C:\sara or\פרויקט גמר עם שרה אור\github\project\DAL\obj\Debug\DAL.dll
+C:\sara or\פרויקט גמר עם שרה אור\github\project\DAL\obj\Debug\DAL.pdb

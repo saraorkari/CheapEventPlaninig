@@ -1,0 +1,64 @@
+<ul>
+  <li *ngFor="let item of arr">
+    <div class="divEvent">
+      <!-- <a mat-button routerLink="/product-found/item.Product?.Id"> -->
+      <img src="/assets/image/{{item.Picture}}">
+      <button *ngIf="user" mat-raised-button routerLink="/update-mail/{{message}}/{{item.Name}}">עדכון
+        במייל</button>
+      <br>
+      <!-- <div *ngIf="!user&&firstTime">x
+        <div>עדיין לא רשום????</div>
+      </div> -->
+      {{item.Name}}
+      <br>
+      <!-- {{item.Description}} -->
+      <a mat-button (click)="none(item.Id)">השוואת מחירים</a>
+      <div (click)="none(-1)" *ngIf="myVar>0&&myVar==item.Id" class="fadeInDown">
+        <table>
+          <tr>
+            <th>חנות</th>
+            <th>מחיר</th>
+            <th>תיאור</th>
+            <th>עיר</th>
+            <th>טלפון</th>
+          </tr>
+          <tr *ngFor="let item2 of item.ProductInShops; index as i">
+            <td>{{item2.Shop?.Name}}</td>
+            <td>{{item2.Price}}</td>
+            <td>{{item2.Description}}</td>
+            <td>{{item2.Shop?.CityName}}</td>
+            <td>{{item2.Shop?.Phone}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </li>
+</ul>
+<!-- <h2>{{err}}</h2> -->
+<h2 >{{massge}}</h2>
+
+<!-- <p *ngIf="isa">לא נמצאו תוצאות </p>
+<table mat-table *ngIf="!isa" [dataSource]="arr" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="Shop">
+    <th mat-header-cell *matHeaderCellDef> חנות </th>
+    <td mat-cell *matCellDef="let element"> {{element.Shop?.Name}}
+
+  <ng-container matColumnDef="City">
+    <th mat-header-cell *matHeaderCellDef> עיר </th>
+    <td mat-cell *matCellDef="let element"> {{element.Shop?.City?.Name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Phone">
+    <th mat-header-cell *matHeaderCellDef> טלפון </th>
+    <td mat-cell *matCellDef="let element"> {{element.Shop?.Phone}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Price">
+    <th mat-header-cell *matHeaderCellDef> מחיר </th>
+    <td mat-cell *matCellDef="let element"> {{element.Price}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table> -->

@@ -1,0 +1,11 @@
+<h1>עריכת פרטי {{product?.Product?.Name}}</h1>
+<form [formGroup]="form" (ngSubmit)="save()">
+    <p>תיאור:</p>
+    <input formControlName="Description" placeholder="תאור" />
+    <p>מחיר:</p>
+    <input formControlName="Price" placeholder="מחיר"/>
+    <br>
+    <br>
+    <button mat-raised-button type="submit" [disabled]="!form.valid">שליחה</button>
+</form>
+<h5>{{msg}}</h5>
